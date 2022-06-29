@@ -102,8 +102,97 @@ function maxConsecutiveSum(arr, num) {
   return maxSum;
 }
 
-maxConsecutiveSum([2, 6, 9, 2, 1, 8, 5, 6, 3], 3);
+// maxConsecutiveSum([2, 6, 9, 2, 1, 8, 5, 6, 3], 3);
 // console.log(maxConsecutiveSum([2, 6, 9, 2, 1, 8, 5, 6, 3], 3);
 
 ////////////////////////////////////////////
 ////// Divide and Conquer
+
+function search(arr, val) {
+  let min = 0;
+  let max = arr.length - 1;
+
+  while (min <= max) {
+    let middle = Math.floor((min + max) / 2);
+
+    if (arr[middle] < val) {
+      min = middle + 1;
+    } else if (arr[middle] > val) {
+      max = middle - 1;
+    } else {
+      return middle;
+    }
+  }
+  return -1;
+}
+
+// console.log(search([1, 2, 2, 3, 5, 7, 8], 5));
+
+////////////////////////////////////////////
+////// Recursion
+
+//Factorial
+
+function factorial(n) {
+  if (n === 1) return 1;
+
+  return factorial(n - 1) * n;
+}
+
+// console.log(factorial(5));
+
+function power(n1, n2) {
+  if (n2 === 0) return 1;
+
+  if (n2 === 1) return n1;
+
+  return power(n1, n2 - 1) * n1;
+}
+
+// console.log(power(2, 5));
+
+function productOfArray(arr) {
+  if (arr.length === 0) return 1;
+
+  return arr[0] * productOfArray(arr.slice(1));
+}
+
+// console.log(productOfArray([1, 2, 3, 4]));
+
+function fib(n) {
+  if (n <= 2) return 1;
+
+  return fib(n - 1) + fib(n - 2);
+}
+
+// console.log(fib(6));
+
+function reverse(str) {
+  if (str.length <= 1) return str;
+
+  return reverse(str.slice(1)) + str[0];
+}
+
+// console.log(reverse("awesome"));
+
+function isPalindrome(str) {
+  // add whatever parameters you deem necessary - good luck!
+
+  // if (str.length % 2 === 0) return false;
+
+  if (str.length <= 1) return str;
+
+  return isPalindrome(str.slice(1)) + str[0] === str ? true : false;
+}
+
+// console.log(isPalindrome("tacocat"));
+
+// console.log("taccat".slice(1, -1));
+
+function someRecursive(array, callback) {
+  if (array.length === 0) return false;
+  if (callback(array[0])) return true;
+  return someRecursive(array.slice(1), callback);
+}
+
+console.log(someRecursive([1, 4, 3, 3], (val) => val % 2 === 0));
